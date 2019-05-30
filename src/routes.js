@@ -36,7 +36,7 @@ router.post('/create', (req, res)=>{
             res.status(400).json(err);
         })
         .done((response)=>{
-            res.status(200).json(response);
+            res.status(201).json(response);
         })
     });
 });

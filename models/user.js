@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const config = require('../config/database.js');
-
+const moment = require('moment');
 var sequelize = new Sequelize(config);
     
 var User = sequelize.define('user', {
@@ -40,6 +40,20 @@ var User = sequelize.define('user', {
             notEmpty: {
                 msg: "Esse campo não pode ser vazio!"
             }
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DataTypes.DATE, //DATEONLY
+        get: function() {
+          return moment.utc(this.getDataValue('createdAt')).format('YYYY-MM-DD hh:mm:ss');
+        }
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DataTypes.DATE, //DATEONLY
+        get: function() {
+          return moment.utc(this.getDataValue('updateAt')).format('YYYY-MM-DD hh:mm:ss');
         }
       }
 });
